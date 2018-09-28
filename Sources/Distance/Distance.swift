@@ -2,8 +2,6 @@ import Foundation
 
 public struct Distance: CustomStringConvertible, Comparable {
   public let meter: Double
-  public static let zero = Distance(km: 0)
-  public static let earthRadius = Distance(km: 6378)
 
   public init(meter: Double) {
     self.meter = meter
@@ -58,21 +56,15 @@ public struct Distance: CustomStringConvertible, Comparable {
   }
 
   public var description: String {
-    if meter == 1 {
-      return "1 meter"
-    } else if meter < 1000 {
-      return "\(Int(meter)) meters"
+    if meter <= 1000 {
+      return String(Int(nearest(Distance(meter: 100)).meter)) + " meters"
     } else {
-      return "\(Int(meter / 1000.0)) km"
+      return String(Int(nearest(Distance(km: 1)).km)) + "km"
     }
   }
 
   public var isZero: Bool {
-    return Int(km) == 0
-  }
-
-  public func isWithin(km: Distance) -> Bool {
-    return self < km
+    return nearest(Distance(meter: 100)).meter < 500
   }
 
   public var km: Double {
@@ -80,6 +72,6 @@ public struct Distance: CustomStringConvertible, Comparable {
   }
 
   public func nearest(_ distance: Distance = Distance(km: 10)) -> Distance {
-    return Distance(meter: (Int(meter) / Int(distance.meter)) * Int(distance.meter))
+    return Distance(meter: Int(round(meter / distance.meter)) * Int(distance.meter))
   }
 }
