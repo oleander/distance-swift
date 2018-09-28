@@ -1,6 +1,8 @@
 import Foundation
 
 public struct Distance: CustomStringConvertible, Comparable {
+  static public let zero = Distance(km: 0)
+  
   public let meter: Double
 
   public init(meter: Double) {
