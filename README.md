@@ -1,5 +1,7 @@
 # Distance
 
+[![Build Status](https://travis-ci.org/oleander/distance-swift.svg?branch=master)](https://travis-ci.org/oleander/distance-swift)
+
 A Swift library for handling metric distances.
 
 ## Example
